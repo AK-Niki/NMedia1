@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
             content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия — помочь встать на путь роста и начать цепочку перемен → http://netolo.gy/fyb",
             published = "21 мая в 18:36",
             likedByMe = false,
-            likes = 999,
+            likes = 3299,
             shares = 0,
             views = 500
         )
@@ -43,13 +43,20 @@ class MainActivity : AppCompatActivity() {
             Repost.setOnClickListener {
                 post.shares++
                 updateSharesCount(post.shares)
+                updateShareIcon(post.shares)
             }
         }
     }
 
     private fun updateLikeIcon(liked: Boolean) {
         binding.Likes.setImageResource(
-            if (liked) R.drawable.favorite_24dp_fill0_wght400_grad0_opsz24 else R.drawable.heart_plus_24dp_fill0_wght400_grad0_opsz24
+            if (liked) R.drawable.heart_plus_24dp_fill0_wght400_grad0_opsz24 else R.drawable.favorite_24dp_fill0_wght400_grad0_opsz24
+        )
+    }
+
+    private fun updateShareIcon(shares: Int) {
+        binding.Repost.setImageResource(
+            if (shares % 2 == 0) android.R.drawable.ic_menu_share else R.drawable.share_24dp_fill0_wght400_grad0_opsz24
         )
     }
 
@@ -67,9 +74,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun formatCount(count: Int): String {
         return when {
-            count >= 1_000_000 -> "%.1fM".format(count / 1_000_000.0)
-            count >= 10_000 -> (count / 1_000).toString() + "K"
-            count >= 1_000 -> "%.1fK".format(count / 1_000.0)
+            count >= 1_000_000 -> "${count / 1_000_000}.${(count % 1_000_000) / 100_000}M"
+            count >= 10_000 -> "${count / 1_000}.${(count % 1_000) / 100}K"
+            count >= 1_000 -> "${count / 1_000}.${(count % 1_000) / 100}K"
             else -> count.toString()
         }
     }
@@ -85,3 +92,5 @@ data class Post(
     var shares: Int = 0,
     var views: Int = 0
 )
+
+

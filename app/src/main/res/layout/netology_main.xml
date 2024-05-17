@@ -16,14 +16,13 @@
 
     <TextView
         android:id="@+id/author"
-        android:layout_width="267dp"
-        android:layout_height="21dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:ellipsize="end"
         android:singleLine="true"
         android:text="Нетология. Университет интернет-профессий будущего"
         app:layout_constraintBottom_toTopOf="@+id/published"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/menu"
+        app:layout_constraintEnd_toStartOf="@+id/menu"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/avatar"
         app:layout_constraintTop_toTopOf="@+id/avatar"
@@ -31,8 +30,8 @@
 
     <TextView
         android:id="@+id/published"
-        android:layout_width="119dp"
-        android:layout_height="26dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="21 мая в 18:36"
         app:layout_constraintBottom_toBottomOf="@+id/avatar"
         app:layout_constraintStart_toEndOf="@+id/avatar"
@@ -105,11 +104,11 @@
         android:id="@+id/LikesN"
         android:layout_width="40dp"
         android:layout_height="30dp"
-        android:text="10"
+        android:text="3299"
         app:layout_constraintBottom_toBottomOf="@+id/Likes"
         app:layout_constraintStart_toEndOf="@+id/Likes"
         app:layout_constraintTop_toTopOf="@+id/Likes"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.833" />
 
     <TextView
         android:id="@+id/ViewsN"
