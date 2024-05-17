@@ -90,12 +90,12 @@
         android:layout_height="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@android:drawable/checkbox_on_background" />
+        app:srcCompat="@drawable/favorite_24dp_fill0_wght400_grad0_opsz24" />
 
     <TextView
         android:id="@+id/RepostN"
-        android:layout_width="22dp"
-        android:layout_height="25dp"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
         android:text="5"
         app:layout_constraintBottom_toBottomOf="@+id/Repost"
         app:layout_constraintStart_toEndOf="@+id/Repost"
@@ -103,8 +103,8 @@
 
     <TextView
         android:id="@+id/LikesN"
-        android:layout_width="28dp"
-        android:layout_height="31dp"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
         android:text="10"
         app:layout_constraintBottom_toBottomOf="@+id/Likes"
         app:layout_constraintStart_toEndOf="@+id/Likes"
@@ -124,11 +124,11 @@
 
     <ImageView
         android:id="@+id/Views"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="31dp"
+        android:layout_height="35dp"
         app:layout_constraintEnd_toStartOf="@+id/ViewsN"
         app:layout_constraintTop_toBottomOf="@+id/content"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+        app:srcCompat="@drawable/visibility_24dp_fill0_wght400_grad0_opsz24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
