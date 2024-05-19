@@ -1,12 +1,14 @@
 package ru.netology.nmedia
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.NetologyMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: NetologyMainBinding
+    private val viewModel: PostViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,14 +35,14 @@ class MainActivity : AppCompatActivity() {
             updateSharesCount(post.shares)
             updateViewsCount(post.views)
 
-            Likes.setOnClickListener {
+            likes.setOnClickListener {
                 post.likedByMe = !post.likedByMe
                 post.likes += if (post.likedByMe) 1 else -1
                 updateLikeIcon(post.likedByMe)
                 updateLikesCount(post.likes)
             }
 
-            Repost.setOnClickListener {
+            repost.setOnClickListener {
                 post.shares++
                 updateSharesCount(post.shares)
                 updateShareIcon(post.shares)
@@ -49,27 +51,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateLikeIcon(liked: Boolean) {
-        binding.Likes.setImageResource(
+        binding.likes.setImageResource(
             if (liked) R.drawable.heart_plus_24dp_fill0_wght400_grad0_opsz24 else R.drawable.favorite_24dp_fill0_wght400_grad0_opsz24
         )
     }
 
     private fun updateShareIcon(shares: Int) {
-        binding.Repost.setImageResource(
+        binding.repost.setImageResource(
             if (shares % 2 == 0) android.R.drawable.ic_menu_share else R.drawable.share_24dp_fill0_wght400_grad0_opsz24
         )
     }
 
     private fun updateLikesCount(likes: Int) {
-        binding.LikesN.text = formatCount(likes)
+        binding.likesN.text = formatCount(likes)
     }
 
     private fun updateSharesCount(shares: Int) {
-        binding.RepostN.text = formatCount(shares)
+        binding.repostN.text = formatCount(shares)
     }
 
     private fun updateViewsCount(views: Int) {
-        binding.ViewsN.text = formatCount(views)
+        binding.viewsN.text = formatCount(views)
     }
 
     private fun formatCount(count: Int): String {
@@ -82,16 +84,3 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
-
-data class Post(
-    val id: Int,
-    val author: String,
-    val content: String,
-    val published: String,
-    var likedByMe: Boolean,
-    var likes: Int = 0,
-    var shares: Int = 0,
-    var views: Int = 0
-)
-
-

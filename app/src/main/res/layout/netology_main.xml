@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="99dp"
@@ -53,7 +52,6 @@
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="avatar,published,menu" />
 
-
     <TextView
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -67,7 +65,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrier" />
 
-
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
         android:layout_width="wrap_content"
@@ -76,18 +73,18 @@
         app:constraint_referenced_ids="content" />
 
     <ImageView
-        android:id="@+id/Repost"
+        android:id="@+id/repost"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/LikesN"
-        app:layout_constraintStart_toEndOf="@+id/LikesN"
+        app:layout_constraintBottom_toBottomOf="@+id/likesN"
+        app:layout_constraintStart_toEndOf="@+id/likesN"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/ic_menu_share" />
 
     <ImageView
-        android:id="@+id/Likes"
+        android:id="@+id/likes"
         android:layout_width="29dp"
         android:layout_height="36dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,42 +92,41 @@
         app:srcCompat="@drawable/favorite_24dp_fill0_wght400_grad0_opsz24" />
 
     <TextView
-        android:id="@+id/RepostN"
+        android:id="@+id/repostN"
         android:layout_width="40dp"
         android:layout_height="20dp"
         android:text="5"
-        app:layout_constraintBottom_toBottomOf="@+id/Repost"
-        app:layout_constraintStart_toEndOf="@+id/Repost"
-        app:layout_constraintTop_toTopOf="@+id/Repost" />
+        app:layout_constraintBottom_toBottomOf="@+id/repost"
+        app:layout_constraintStart_toEndOf="@+id/repost"
+        app:layout_constraintTop_toTopOf="@+id/repost" />
 
     <TextView
-        android:id="@+id/LikesN"
+        android:id="@+id/likesN"
         android:layout_width="40dp"
         android:layout_height="30dp"
         android:text="99999"
-        app:layout_constraintBottom_toBottomOf="@+id/Likes"
-        app:layout_constraintStart_toEndOf="@+id/Likes"
-        app:layout_constraintTop_toTopOf="@+id/Likes"
+        app:layout_constraintBottom_toBottomOf="@+id/likes"
+        app:layout_constraintStart_toEndOf="@+id/likes"
+        app:layout_constraintTop_toTopOf="@+id/likes"
         app:layout_constraintVertical_bias="0.833" />
 
     <TextView
-        android:id="@+id/ViewsN"
+        android:id="@+id/viewsN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:text="500"
-        app:layout_constraintBottom_toBottomOf="@+id/Views"
+        app:layout_constraintBottom_toBottomOf="@+id/views"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/Views"
+        app:layout_constraintTop_toTopOf="@+id/views"
         app:layout_constraintVertical_bias="0.384" />
 
     <ImageView
-        android:id="@+id/Views"
+        android:id="@+id/views"
         android:layout_width="31dp"
         android:layout_height="35dp"
-        app:layout_constraintEnd_toStartOf="@+id/ViewsN"
+        app:layout_constraintEnd_toStartOf="@+id/viewsN"
         app:layout_constraintTop_toBottomOf="@+id/content"
         app:srcCompat="@drawable/visibility_24dp_fill0_wght400_grad0_opsz24" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
