@@ -1,3 +1,4 @@
+// Post.kt
 package ru.netology.nmedia
 
 data class Post(
@@ -5,8 +6,8 @@ data class Post(
     val author: String,
     val content: String,
     val published: String,
-    var likedByMe: Boolean,
-    var likes: Int = 0,
-    var shares: Int = 0,
-    var views: Int = 0
+    val likedByMe: Boolean,
+    val likes: Int,
+    val shares: Int,
+    val views: Int
 )
