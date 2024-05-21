@@ -19,6 +19,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        dataBinding = true // Добавлено для включения Data Binding
     }
 
     buildTypes {
