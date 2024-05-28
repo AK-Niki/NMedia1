@@ -72,19 +72,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
         tools:text="Привет, это новая Нетология!" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/footer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageButton
         android:id="@+id/like"
@@ -97,16 +91,54 @@
         app:layout_constraintTop_toBottomOf="@id/content"
         tools:srcCompat="@drawable/favorite_24dp_fill0_wght400_grad0_opsz24" />
 
+    <TextView
+        android:id="@+id/likesN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/like"
+        app:layout_constraintStart_toEndOf="@id/like"
+        tools:text="0" />
+
     <ImageButton
-        android:id="@+id/share"
+        android:id="@+id/repost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@android:drawable/ic_menu_share"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/like"
+        app:layout_constraintStart_toEndOf="@id/likesN"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@android:drawable/ic_menu_share" />
 
+    <TextView
+        android:id="@+id/repostN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/repost"
+        app:layout_constraintStart_toEndOf="@id/repost"
+        tools:text="0" />
+
+    <ImageButton
+        android:id="@+id/views"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@drawable/visibility_24dp_fill0_wght400_grad0_opsz24"
+        app:layout_constraintBottom_toBottomOf="@+id/viewsN"
+        app:layout_constraintEnd_toStartOf="@+id/viewsN"
+        tools:srcCompat="@drawable/visibility_24dp_fill0_wght400_grad0_opsz24" />
+
+    <TextView
+        android:id="@+id/viewsN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content"
+        tools:text="0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+
