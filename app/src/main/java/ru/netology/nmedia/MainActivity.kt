@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.View
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.util.AndroidUtils
+import ru.netology.nmedia.PostViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -16,24 +19,16 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val adapter = PostsAdapter(object : OnInteractionListener {
-            override fun onLike(post: Post) {
-                viewModel.likeById(post.id)
-            }
+        val adapter = PostsAdapter(
+            onLikeListener = { post -> viewModel.likeById(post.id) },
+            onShareListener = { post -> viewModel.shareById(post.id) },
+            onEditListener = { post -> viewModel.edit(post) },
+            onRemoveListener = { post -> viewModel.removeById(post.id) }
+        )
 
-            override fun onShare(post: Post) {
-                viewModel.shareById(post.id)
-            }
-
-            override fun onEdit(post: Post) {
-                viewModel.edit(post)
-            }
-
-            override fun onRemove(post: Post) {
-                viewModel.removeById(post.id)
-            }
-        })
+        binding.list.layoutManager = LinearLayoutManager(this)
         binding.list.adapter = adapter
+
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
@@ -67,9 +62,14 @@ class MainActivity : AppCompatActivity() {
                 AndroidUtils.hideKeyboard(this)
             }
         }
+
+        binding.cancel.setOnClickListener {
+            viewModel.cancelEdit()
+            binding.content.setText("")
+            binding.group.visibility = View.GONE
+        }
     }
 }
-
 
 
 
