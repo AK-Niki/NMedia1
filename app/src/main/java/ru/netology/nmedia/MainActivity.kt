@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.view.View
 import ru.netology.nmedia.databinding.ActivityMainBinding
-import ru.netology.nmedia.util.AndroidUtils
-import ru.netology.nmedia.PostViewModel
+import android.view.View
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,12 +35,14 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L) {
+                binding.group.visibility = View.GONE
                 return@observe
             }
             with(binding.content) {
                 requestFocus()
                 setText(post.content)
             }
+            binding.group.visibility = View.VISIBLE
         }
 
         binding.save.setOnClickListener {
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 if (text.isNullOrBlank()) {
                     Toast.makeText(
                         this@MainActivity,
-                        context.getString(R.string.error_empty_content),
+                        "Это поле не может быть пустым",
                         Toast.LENGTH_SHORT
                     ).show()
                     return@setOnClickListener
@@ -59,17 +61,17 @@ class MainActivity : AppCompatActivity() {
 
                 setText("")
                 clearFocus()
-                AndroidUtils.hideKeyboard(this)
             }
         }
 
         binding.cancel.setOnClickListener {
             viewModel.cancelEdit()
             binding.content.setText("")
-            binding.group.visibility = View.GONE
+            binding.content.clearFocus()
         }
     }
 }
+
 
 
 
