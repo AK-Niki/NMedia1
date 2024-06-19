@@ -6,6 +6,7 @@ import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import ru.netology.nmedia.databinding.CardPostBinding
 
 typealias OnLikeListener = (post: Post) -> Unit
@@ -71,7 +72,7 @@ class PostsAdapter(
         }
 
         private fun updateLikeIcon(liked: Boolean) {
-            binding.like.setImageResource(
+            (binding.like as MaterialButton).setIconResource(
                 if (liked) R.drawable.heart_plus_24dp_fill0_wght400_grad0_opsz24 else R.drawable.favorite_24dp_fill0_wght400_grad0_opsz24
             )
         }
@@ -109,5 +110,6 @@ class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
         return oldItem == newItem
     }
 }
+
 
 
