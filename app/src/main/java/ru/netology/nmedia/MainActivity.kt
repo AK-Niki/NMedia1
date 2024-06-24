@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import android.view.View
 
-
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private val viewModel: PostViewModel by viewModels()
@@ -36,42 +35,26 @@ class MainActivity : AppCompatActivity() {
         viewModel.edited.observe(this) { post ->
             if (post.id == 0L) {
                 binding.group.visibility = View.GONE
-                return@observe
+            } else {
+                binding.group.visibility = View.VISIBLE
+                binding.content.setText(post.content)
             }
-            with(binding.content) {
-                requestFocus()
-                setText(post.content)
-            }
-            binding.group.visibility = View.VISIBLE
         }
 
         binding.save.setOnClickListener {
-            with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Это поле не может быть пустым",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    return@setOnClickListener
-                }
-
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-
-                setText("")
-                clearFocus()
-            }
+            viewModel.changeContent(binding.content.text.toString())
+            viewModel.save()
+            binding.content.setText("")
+            binding.group.visibility = View.GONE
         }
 
         binding.cancel.setOnClickListener {
             viewModel.cancelEdit()
             binding.content.setText("")
-            binding.content.clearFocus()
+            binding.group.visibility = View.GONE
         }
     }
 }
-
 
 
 

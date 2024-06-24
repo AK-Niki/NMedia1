@@ -1,8 +1,9 @@
 package ru.netology.nmedia
 
-import androidx.lifecycle.LiveData
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
 
 private val empty = Post(
     id = 0,
@@ -12,9 +13,9 @@ private val empty = Post(
     published = ""
 )
 
-class PostViewModel : ViewModel() {
-    private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val data = repository.getAll()
+class PostViewModel(application: Application) : AndroidViewModel(application) {
+    private val repository: PostRepository = PostRepositorySQLiteImpl(application)
+    val data: LiveData<List<Post>> = repository.getAll()
     val edited = MutableLiveData(empty)
 
     fun save() {
