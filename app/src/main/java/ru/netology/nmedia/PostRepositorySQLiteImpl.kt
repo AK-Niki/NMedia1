@@ -94,17 +94,31 @@ class PostRepositorySQLiteImpl(private val context: Context) : PostRepository {
 
     override fun shareById(id: Long) {
         val db = dbHelper.writableDatabase
-        val values = ContentValues().apply {
-            put(PostDatabaseHelper.COLUMN_SHARES, "shares + 1")
-        }
-        db.update(
+        val cursor = db.query(
             PostDatabaseHelper.TABLE_NAME,
-            values,
+            null,
             "${PostDatabaseHelper.COLUMN_ID} = ?",
-            arrayOf(id.toString())
+            arrayOf(id.toString()),
+            null,
+            null,
+            null
         )
+        if (cursor.moveToFirst()) {
+            val currentShares = cursor.getInt(cursor.getColumnIndexOrThrow(PostDatabaseHelper.COLUMN_SHARES))
+            val values = ContentValues().apply {
+                put(PostDatabaseHelper.COLUMN_SHARES, currentShares + 1)
+            }
+            db.update(
+                PostDatabaseHelper.TABLE_NAME,
+                values,
+                "${PostDatabaseHelper.COLUMN_ID} = ?",
+                arrayOf(id.toString())
+            )
+        }
+        cursor.close()
         loadPosts()
     }
+
 
     override fun save(post: Post) {
         val db = dbHelper.writableDatabase
@@ -140,3 +154,4 @@ class PostRepositorySQLiteImpl(private val context: Context) : PostRepository {
         loadPosts()
     }
 }
+
