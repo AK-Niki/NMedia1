@@ -112,4 +112,3 @@ class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
 }
 
 
-
