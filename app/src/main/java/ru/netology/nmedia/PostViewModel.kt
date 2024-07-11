@@ -2,47 +2,59 @@ package ru.netology.nmedia
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.room.Room
 
 private val empty = Post(
     id = 0,
-    content = "",
     author = "",
+    content = "",
+    published = "",
     likedByMe = false,
-    published = ""
+    likes = 0,
+    shares = 0,
+    views = 0
 )
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: PostRepository = PostRepositorySQLiteImpl(application)
+
+    private val repository: PostRepository = PostRepositoryRoomImpl(
+        Room.databaseBuilder(application, AppDatabase::class.java, "app.db")
+            .allowMainThreadQueries()
+            .build().postDao()
+    )
+
     val data: LiveData<List<Post>> = repository.getAll()
-    val edited = MutableLiveData(empty)
+    private val _edited = MutableLiveData(empty)
+    val edited: LiveData<Post> = _edited
+
+    fun likeById(id: Long) = repository.likeById(id)
+
+    fun shareById(id: Long) = repository.shareById(id)
+
+    fun removeById(id: Long) = repository.removeById(id)
 
     fun save() {
         edited.value?.let {
             repository.save(it)
         }
-        edited.value = empty
+        _edited.value = empty
     }
 
     fun edit(post: Post) {
-        edited.value = post
-    }
-
-    fun cancelEdit() {
-        edited.value = empty
+        _edited.value = post
     }
 
     fun changeContent(content: String) {
         val text = content.trim()
-        if (edited.value?.content == text) {
+        if (_edited.value?.content == text) {
             return
         }
-        edited.value = edited.value?.copy(content = text)
+        _edited.value = _edited.value?.copy(content = text)
     }
 
-    fun likeById(id: Long) = repository.likeById(id)
-    fun removeById(id: Long) = repository.removeById(id)
-    fun shareById(id: Long) = repository.shareById(id)
+    fun cancelEdit() {
+        _edited.value = empty
+    }
 }
-
